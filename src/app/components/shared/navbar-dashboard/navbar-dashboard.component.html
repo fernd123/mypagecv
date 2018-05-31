@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary-custom fixed-top" style="background-color: #000000" id="sideNav">
+<h2 style="color:white">Panel de Control</h2>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['../personaldata']">Datos Personales</a> <!-- #about -->
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['../experience']">Experiencia</a> <!-- #experience -->
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" (click)="navigateTo('education')">Educacion</a> <!-- #education -->
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" (click)="navigateTo('skills')">Habilidades</a> <!-- #skills -->
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" (click)="navigateTo('interests')">Intereses</a> <!-- #interests -->
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" (click)="navigateTo('awards')">Reconocimientos</a> <!-- #awards -->
+      </li>
+    </ul>
+  </div>
+</nav>

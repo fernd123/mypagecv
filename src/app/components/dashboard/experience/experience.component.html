@@ -1,0 +1,85 @@
+<app-navbar-dashboard></app-navbar-dashboard>
+
+<div class="container">
+  <div>
+    <h1>Experiencia</h1>
+  </div>
+
+  <div *ngIf="true" class="alert alert-warning" role="alert">
+    {{message}}
+  </div>
+
+  <div>
+    <button class="btn btn-success" (click)="add()">
+      <span class="fa fa-plus"></span> Añadir nueva experiencia
+    </button>
+  </div>
+
+  <div class="form-group" *ngFor="let exp of experienceList; let i = index;">
+
+    <form #experienceForm="ngForm" (ngSubmit)="onSubmit(experienceForm)">
+      <div class="text-right" style="margin-bottom: 10px">
+
+        <button type="button" (click)="edit(experienceForm, exp.id)" class="btn btn-info" *ngIf="experienceForm.disabled">
+          <span class="fa fa-edit"></span>
+        </button>
+
+        <button type="button" (click)="remove(experienceForm, exp.id)" class="btn btn-danger" *ngIf="experienceForm.disabled">
+          <span class="fa fa-trash"></span>
+        </button>
+
+        <button type="button" (click)="save(experienceForm, exp.id)" class="btn btn-success" *ngIf="!experienceForm.disabled">
+          <span class="fa fa-check"></span>
+        </button>
+
+        <button type="button" (click)="cancel(experienceForm, exp.id)" class="btn btn-warning" *ngIf="!experienceForm.disabled">
+          <span class="fa fa-remove"></span>
+        </button>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label for="role" class="center-block">Puesto</label>
+          <input type="text" class="form-control no-border" name="role{{exp.id}}" [disabled]="true" [(ngModel)]="exp.role" placeholder="Puesto"
+            autocomplete="role">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label for="company" class="center-block">Empresa</label>
+          <input type="text" class="form-control" name="company{{exp.id}}" [disabled]="true" [(ngModel)]="exp.company" placeholder="Empresa"
+            autocomplete="company">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label for="datefrom" class="center-block">Fecha Desde</label>
+          <input type="date" class="form-control" name="datefrom{{exp.id}}" [disabled]="true" [(ngModel)]="exp.datefrom" placeholder="Fecha Desde"
+            autocomplete="datefrom">
+        </div>
+
+        <div class="col">
+          <label for="dateto" class="center-block">Fecha Hasta</label>
+          <input type="date" class="form-control" name="dateto{{exp.id}}" [disabled]="true" [(ngModel)]="exp.dateto" placeholder="Fecha Hasta"
+            autocomplete="dateto">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label for="description" class="center-block">Descripción</label>
+          <textarea class="form-control" id="description" name="description{{exp.id}}" [disabled]="true" [(ngModel)]="exp.description"
+            rows="5" autocomplete="description"></textarea>
+        </div>
+      </div>
+
+      <div style="margin-top: 10px">
+        <button type="submit" class="btn btn-success btn-block" *ngIf="false">Guardar</button> &nbsp;
+      </div>
+
+      <hr>
+
+    </form>
+  </div>

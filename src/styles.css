@@ -143,7 +143,18 @@ body {
     color: #BD5D38 ;
   }
   
-  a:hover, a:focus, a:active {
+  a:hover, a:focus {
     color: #824027;
+    cursor: pointer;
   }
   
+  #fixedbutton {
+    position: fixed;
+    float: relative;
+    bottom: 0px;
+    left: 0px; 
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-top-left-radius: 40px;
+  }
