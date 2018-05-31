@@ -23,13 +23,14 @@
     "@angular/router": "^5.2.0",
     "bootstrap": "^4.1.1",
     "core-js": "^2.4.1",
+    "devicons": "^1.8.0",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "jquery.js": "0.0.2-security",
     "popper.js": "^1.14.3",
     "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19",
-    "devicons": "^1.8.0",
-    "simple-line-icons": "^2.4.1"
+    "simple-line-icons": "^2.4.1",
+    "zone.js": "^0.8.19"
   },
   "devDependencies": {
     "@angular/cli": "1.6.8",
