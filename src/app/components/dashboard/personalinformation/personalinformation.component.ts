@@ -12,6 +12,7 @@ export class PersonalinformationComponent implements OnInit {
   personalinfoForm: FormGroup;
   message: String = "No existe ningún registro relacionada con la información personal";
   personalData: PersonalData;
+  save: boolean = false;
 
   constructor(private fb: FormBuilder) {
     //TODO: Cargar los datos, llamada a Firebase
@@ -32,14 +33,20 @@ export class PersonalinformationComponent implements OnInit {
       country: new FormControl(this.personalData.country, Validators.required),
       information: new FormControl(this.personalData.information, Validators.required)
     });
+    this.personalinfoForm.disable();
   }
 
   onSubmit() {
     console.log("submit");
   }
 
+  edit(): void {
+    this.save = !this.save;
+    this.save ? this.personalinfoForm.enable() : this.personalinfoForm.disable();
+  }
+
   //TODO
-  isPersonalInfo(){
+  isPersonalInfo() {
     return this.personalData != undefined;
   }
 

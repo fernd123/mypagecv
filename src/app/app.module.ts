@@ -13,6 +13,10 @@ import { APP_ROUTING } from './app.routes';
 import { NavbarDashboardComponent } from './components/shared/navbar-dashboard/navbar-dashboard.component';
 import { PersonalinformationComponent } from './components/dashboard/personalinformation/personalinformation.component';
 import { ExperienceComponent } from './components/dashboard/experience/experience.component';
+import { CourseComponent } from './components/dashboard/course/course.component';
+import { EducationComponent } from './components/dashboard/education/education.component';
+import { SkillsComponent } from './components/dashboard/skills/skills.component';
+import { InterestsComponent } from './components/dashboard/interests/interests.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { ExperienceComponent } from './components/dashboard/experience/experienc
     DashboardComponent,
     NavbarDashboardComponent,
     PersonalinformationComponent,
-    ExperienceComponent
+    ExperienceComponent,
+    CourseComponent,
+    EducationComponent,
+    SkillsComponent,
+    InterestsComponent
   ],
   imports: [
     BrowserModule,

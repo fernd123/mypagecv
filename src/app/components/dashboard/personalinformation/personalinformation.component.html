@@ -9,7 +9,18 @@
     {{message}}
   </div>
 
-  <form [formGroup]="personalinfoForm" (ngSubmit)="onSubmit()" >
+  <form [formGroup]="personalinfoForm" (ngSubmit)="onSubmit()">
+
+    <div class="col text-right" style="margin-bottom: 10px">
+      <button type="button" class="btn btn-info" (click)="edit()" *ngIf="!save">
+        <span class="fa fa-pencil"></span> Editar
+      </button>
+
+      <button type="button" class="btn btn-warning" (click)="edit()" *ngIf="save">
+        <span class="fa fa-remove"></span> Cancelar
+      </button>
+    </div>
+
     <div class="form-group">
       <label for="name" class="center-block">Nombre</label>
       <input type="text" class="form-control" formControlName="name" placeholder="Nombre" autocomplete="name">
@@ -59,7 +70,7 @@
     </div>
 
     <div style="margin-top: 10px">
-      <button type="submit" class="btn btn-success btn-block" [disabled]="personalinfoForm.invalid">Guardar</button> &nbsp;
+      <button type="submit" class="btn btn-success btn-block" [disabled]="personalinfoForm.invalid" *ngIf="save">Guardar</button> &nbsp;
     </div>
   </form>
 </div>
