@@ -17,6 +17,7 @@ import { CourseComponent } from './components/dashboard/course/course.component'
 import { EducationComponent } from './components/dashboard/education/education.component';
 import { SkillsComponent } from './components/dashboard/skills/skills.component';
 import { InterestsComponent } from './components/dashboard/interests/interests.component';
+import { AddeducationComponent } from './components/dashboard/education/addeducation/addeducation.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { InterestsComponent } from './components/dashboard/interests/interests.c
     CourseComponent,
     EducationComponent,
     SkillsComponent,
-    InterestsComponent
+    InterestsComponent,
+    AddeducationComponent
   ],
   imports: [
     BrowserModule,

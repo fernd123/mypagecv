@@ -1,0 +1,39 @@
+<form #newEducationForm="ngForm" (ngSubmit)="add(educationForm)">
+    <div class="row">
+      <div class="col">
+        <label for="place" class="center-block">Lugar</label>
+        <input type="text" class="form-control no-border" name="placeModel" [(ngModel)]="educationModel.place" placeholder="Lugar"
+          autocomplete="place">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="degree" class="center-block">Titulación</label>
+        <input type="text" class="form-control" name="degreeModel" [(ngModel)]="educationModel.degree" placeholder="Empresa"
+          autocomplete="degree">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="datefrom" class="center-block">Fecha Desde</label>
+        <input type="date" class="form-control" name="datefromModel" [(ngModel)]="educationModel.datefrom" placeholder="Fecha Desde"
+          autocomplete="datefrom">
+      </div>
+
+      <div class="col">
+        <label for="dateto" class="center-block">Fecha Hasta</label>
+        <input type="date" class="form-control" name="datetoModel" [(ngModel)]="educationModel.dateto" placeholder="Fecha Hasta"
+          autocomplete="dateto">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="description" class="center-block">Descripción</label>
+        <textarea class="form-control" id="description" name="descriptionModel" [(ngModel)]="educationModel.description"
+          rows="5" autocomplete="description"></textarea>
+      </div>
+    </div>
+  </form>

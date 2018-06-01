@@ -9,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EducationComponent implements OnInit {
 
-  experienceForm: FormGroup;
   message: String = "No existe ningún registro relacionada con la experiencia";
   
   educationList: Education[] = [];
+  educationModel: Education = new Education();
 
   constructor(private fb: FormBuilder) {
     //this.createForm();
@@ -30,16 +30,17 @@ export class EducationComponent implements OnInit {
 
   ngOnInit() { }
 
-  add(){
-    
+  add(educationForm: NgForm){
+    console.log(educationForm.value);
+    debugger;
   }
 
-  save(experienceForm: NgForm, id:string){
-    experienceForm.form.disable();
+  save(educationForm: NgForm, id:string){
+    educationForm.form.disable();
   }
   
-  cancel(experienceForm: NgForm, id:string){
-    experienceForm.form.disable();
+  cancel(educationForm: NgForm, id:string){
+    educationForm.form.disable();
   }
   
   edit(experienceForm: NgForm, id:string){
