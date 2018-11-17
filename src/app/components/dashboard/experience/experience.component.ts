@@ -1,5 +1,8 @@
+import { AppConstants } from './../../../app.constants';
+import { DashBoardParent } from './../../models/dashboardparent.model';
+import { DashboardService } from './../../../services/dashboard.service';
 import { Experience } from './../../models/experience.model';
-import { FormGroup, FormBuilder, FormControl, NgForm } from '@angular/forms';
+import { FormBuilder, NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,51 +10,79 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './experience.component.html',
   styles: []
 })
-export class ExperienceComponent implements OnInit {
+export class ExperienceComponent extends DashBoardParent implements OnInit {
 
-  experienceForm: FormGroup;
-  message: String = "No existe ningún registro relacionada con la experiencia";
-  
-  experienceList: Experience[] = [];
+  experienceModel: Experience = new Experience();
+  experienceFormDisabled: boolean = true;
 
-  constructor(private fb: FormBuilder) {
-    //this.createForm();
-    for (let i = 0; i < 3; i++) {
-      let e: Experience = new Experience();
-      e.id = i + "ID";
-      e.role = "A" + i;
-      e.company = "B" + i;
-      e.datefrom = new Date();
-      e.dateto = new Date();
-      e.description = "Description Example";
-      this.experienceList.push(e);
-    }
+  constructor(private fb: FormBuilder,
+    public dashBoardService: DashboardService) {
+    super();
+    this.refreshExperienceList();
   }
 
   ngOnInit() { }
 
-  add(){
-    
+
+  add(experienceForm: NgForm) {
+
   }
 
-  save(experienceForm: NgForm, id:string){
-    experienceForm.form.disable();
+  saveForm(experienceForm: NgForm, id: string) {
+    this.loading = true;
+    experienceForm.value.id = id;
+    debugger;
+    this.dashBoardService.editExperience(experienceForm.value).subscribe(data => {
+      console.log(data);
+      experienceForm.form.disable();
+      this.experienceFormDisabled = true;
+      this.setMessage(this.appConstants.messageSuccessPersonalInfo, this.appConstants.classSuccess);
+      this.refreshExperienceList();
+      this.loading = false;
+    });
   }
-  
-  cancel(experienceForm: NgForm, id:string){
+
+  cancel(experienceForm: NgForm, id: string) {
     experienceForm.form.disable();
+    this.experienceFormDisabled = true;
   }
-  
-  edit(experienceForm: NgForm, id:string){
+
+  editForm(experienceForm: NgForm, id: string) {
     experienceForm.form.enable();
+    this.experienceFormDisabled = false;
   }
 
-  remove(experienceForm: NgForm, id:string){
-    alert('Se va a borrar');
+  remove(experienceForm: NgForm, id: string) {
+    this.loading = true;
+    experienceForm.value.id = id;
+    this.dashBoardService.deleteExperience(experienceForm.value).subscribe(data => {
+      this.dashBoardService.experienceList = [];
+      experienceForm.form.disable();
+      this.experienceFormDisabled = true;
+      this.setMessage(this.appConstants.messageDeleteOk, this.appConstants.classSuccess);
+      this.refreshExperienceList();
+      this.loading = false;
+    });
+
   }
 
   onSubmit(experienceForm: NgForm) {
     experienceForm.form.disable();
+    this.experienceFormDisabled = true;
+  }
+
+  refreshExperienceList(): void {
+    this.loading = true;
+    this.dashBoardService.getExperience().subscribe((data: any) => {
+      this.dashBoardService.experienceList = [];
+      if (data != null)
+        for (let i in data) {
+          data[i].id = i;
+          this.dashBoardService.experienceList.push(data[i]);
+        }
+      this.loading = false;
+      this.dashBoardService.experienceList.length == 0 ? this.setMessage(this.appConstants.messageNoExperienceInfo, this.appConstants.classWarning) : true;
+    });
   }
 
 }

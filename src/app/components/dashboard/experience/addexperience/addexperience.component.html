@@ -8,32 +8,39 @@
     </div>
     <div class="modal-body">
       <!-- INICIO -->
-      <form #newEducationForm="ngForm" (ngSubmit)="add(newEducationForm)">
+      <form #newExperienceForm="ngForm" (ngSubmit)="add(newExperienceForm)">
         <div class="row">
           <div class="col">
             <label for="place" class="center-block">Lugar</label>
-            <input type="text" class="form-control no-border" name="place" [(ngModel)]="educationModel.place" placeholder="Lugar"
+            <input type="text" class="form-control no-border" name="place" [(ngModel)]="experienceModel.place" placeholder="Lugar"
               autocomplete="place">
           </div>
         </div>
 
         <div class="row">
           <div class="col">
-            <label for="degree" class="center-block">Titulación</label>
-            <input type="text" class="form-control" name="degree" [(ngModel)]="educationModel.degree" placeholder="Empresa" autocomplete="degree">
+            <label for="company" class="center-block">Empresa</label>
+            <input type="text" class="form-control" name="company" [(ngModel)]="experienceModel.company" placeholder="Empresa" autocomplete="company">
           </div>
         </div>
 
         <div class="row">
+            <div class="col">
+              <label for="role" class="center-block">Rol</label>
+              <input type="text" class="form-control" name="role" [(ngModel)]="experienceModel.role" placeholder="Rol" autocomplete="role">
+            </div>
+          </div>
+
+        <div class="row">
           <div class="col">
             <label for="datefrom" class="center-block">Fecha Desde</label>
-            <input type="date" class="form-control" name="datefrom" [(ngModel)]="educationModel.datefrom" placeholder="Fecha Desde"
+            <input type="date" class="form-control" name="datefrom" [(ngModel)]="experienceModel.datefrom" placeholder="Fecha Desde"
               autocomplete="datefrom">
           </div>
 
           <div class="col">
             <label for="dateto" class="center-block">Fecha Hasta</label>
-            <input type="date" class="form-control" name="dateto" [(ngModel)]="educationModel.dateto" placeholder="Fecha Hasta"
+            <input type="date" class="form-control" name="dateto" [(ngModel)]="experienceModel.dateto" placeholder="Fecha Hasta"
               autocomplete="dateto">
           </div>
         </div>
@@ -41,7 +48,7 @@
         <div class="row">
           <div class="col">
             <label for="description" class="center-block">Descripción</label>
-            <textarea class="form-control" id="description" name="description" [(ngModel)]="educationModel.description" rows="5"
+            <textarea class="form-control" id="description" name="description" [(ngModel)]="experienceModel.description" rows="5"
               autocomplete="description"></textarea>
           </div>
         </div>

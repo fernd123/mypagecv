@@ -1,5 +1,9 @@
+import { AppConstants } from './../../../app.constants';
+import { DashBoardParent } from './../../models/dashboardparent.model';
+import { DashboardComponent } from './../dashboard.component';
+import { DashboardService } from './../../../services/dashboard.service';
 import { Course } from './../../models/course.model';
-import { NgForm, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,15 +11,19 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './course.component.html',
   styles: []
 })
-export class CourseComponent implements OnInit {
+export class CourseComponent extends DashBoardParent implements OnInit {
 
   courseForm: FormGroup;
   course: Course;
+  courseList: Course[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    private dashboardService: DashboardService) {
+    super();
     this.course = new Course();
     this.course.type = "Curso";
     this.createForm();
+    this.refreshCourseList();
   }
 
   ngOnInit() {
@@ -29,12 +37,37 @@ export class CourseComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  refreshCourseList(): void {
+    this.loading = true;
+    this.dashboardService.getCourses().subscribe((data: any) => {
+      this.courseList = [];
+      if (data != null)
+        for (let i in data) {
+          data[i].id = i;
+          this.courseList.push(data[i]);
+        }
+      this.loading = false;
+    });
 
   }
 
-  delete(): void {
+  onSubmit(): void {
+    this.dashboardService.createCourse(this.courseForm.value).subscribe(
+      data => {
+        console.log(data);
+        this.setMessage(this.appConstants.messageSuccessPersonalInfo, this.appConstants.classSuccess);
+        this.refreshCourseList();
+      },
+      error => {
 
+      }
+    )
+  }
+
+  delete(course: Course): void {
+    this.dashboardService.deleteCourse(course).subscribe(data => {
+      this.refreshCourseList();
+    });
   }
 
 }

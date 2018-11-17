@@ -5,42 +5,47 @@
     <h1>Cursos y Distinciones</h1>
   </div>
 
-  <div *ngIf="true" class="alert alert-warning" role="alert">
-    MENSAJE
+  <div *ngIf="loading">
+    <h5 class="btn btn-warning">CARGANDO...</h5>
   </div>
 
-  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
-    <div class="form-row">
-      <div class="col">
+  <div *ngIf="showMessage" [class]="class" role="alert">
+    {{message}}
+  </div>
+
+  <div *ngIf="!loading">
+
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="col">
           <select class="form-control" formControlName="type">
-          <option selected="selected">Curso</option>
-          <option>Distinción</option>
-        </select>
+            <option selected="selected">Curso</option>
+            <option>Distinción</option>
+          </select>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" formControlName="description" placeholder="Descripción">
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" formControlName="place" placeholder="Lugar">
+        </div>
+
+        <button type="submit" class="btn btn-success" [disabled]="courseForm.invalid">
+          <span class="fa fa-plus"></span> Añadir curso
+        </button>
       </div>
-      <div class="col">
-        <input type="text" class="form-control" formControlName="description" placeholder="Descripción">
-      </div>
-      <div class="col">
-        <input type="text" class="form-control" formControlName="place" placeholder="Lugar">
-      </div>
-
-      <button type="submit" class="btn btn-success" [disabled]="courseForm.invalid">
-        <span class="fa fa-plus"></span> Añadir curso
-      </button>
-    </div>
-  </form>
+    </form>
 
 
-  <ul class="list-group">
-    <li class="list-group-item">Cras justo odio
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let course of courseList">
+        {{ course.description }} -- {{ course.type }}
 
-      <button type="button" (click)="delete()" class="btn btn-danger float-right">
-        <span class="fa fa-remove"></span>
-      </button>
+        <button type="button" (click)="delete(course)" class="btn btn-danger float-right">
+          <span class="fa fa-remove"></span>
+        </button>
 
-      <button type="button" (click)="edit()" class="btn btn-info float-right">
-        <span class="fa fa-pencil"></span>
-      </button>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
 </div>

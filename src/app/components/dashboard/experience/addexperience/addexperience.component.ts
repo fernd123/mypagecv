@@ -1,21 +1,21 @@
+import { Experience } from './../../../models/experience.model';
 import { Router } from '@angular/router';
 import { DashBoardParent } from './../../../models/dashboardparent.model';
 import { AppConstants } from './../../../../app.constants';
 import { DashboardService } from './../../../../services/dashboard.service';
 import { NgForm } from '@angular/forms';
-import { Education } from './../../../models/education.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-addeducation',
-  templateUrl: './addeducation.component.html',
+  selector: 'app-addexperience',
+  templateUrl: './addexperience.component.html',
   styles: []
 })
-export class AddeducationComponent extends DashBoardParent implements OnInit {
+export class AddexperienceComponent extends DashBoardParent implements OnInit {
 
-  educationModel: Education = new Education();
-  educationList: Education[] = [];
+  experienceModel: Experience = new Experience();
+
   @ViewChild('buttonfer') buttonfer;
 
   constructor(private dashBoardService: DashboardService,
@@ -27,13 +27,13 @@ export class AddeducationComponent extends DashBoardParent implements OnInit {
   ngOnInit() {
   }
 
-  add(educationForm: NgForm) {
+  add(experienceForm: NgForm) {
     this.buttonfer.nativeElement.click();
-    this.dashBoardService.createEducation(educationForm.value).subscribe(
+    this.dashBoardService.createExperience(experienceForm.value).subscribe(
       data => {
         console.log(data);
-        this.educationModel = new Education();
-        this.refreshEducationList();
+        this.experienceModel = new Experience();
+        this.refreshExperienceList();
       },
       error => {
 
@@ -41,17 +41,17 @@ export class AddeducationComponent extends DashBoardParent implements OnInit {
     );
   }
 
-  refreshEducationList(): void {
+  refreshExperienceList(): void {
     this.loading = true;
-    this.dashBoardService.getEducation().subscribe((data: any) => {
-      this.dashBoardService.educationList = [];
+    this.dashBoardService.getExperience().subscribe((data: any) => {
+      this.dashBoardService.experienceList = [];
       if (data != null)
         for (let i in data) {
           data[i].id = i;
-          this.dashBoardService.educationList.push(data[i]);
+          this.dashBoardService.experienceList.push(data[i]);
         }
       this.loading = false;
-      this.dashBoardService.educationList.length == 0 ? this.setMessage(this.appConstants.messageNoExperienceInfo, this.appConstants.classWarning) : true;
+      this.dashBoardService.experienceList.length == 0 ? this.setMessage(this.appConstants.messageNoExperienceInfo, this.appConstants.classWarning) : true;
     });
 
   }

@@ -1,44 +1,47 @@
 <app-navbar-dashboard></app-navbar-dashboard>
 
 <div class="container">
-    <div>
-        <h1>Habilidades</h1>
-    </div>
+  <div>
+    <h1>Habilidades</h1>
+  </div>
 
-    <div *ngIf="true" class="alert alert-warning" role="alert">
-        MENSAJE
-    </div>
+  <div *ngIf="loading">
+    <h5 class="btn btn-warning">CARGANDO...</h5>
+  </div>
 
+  <div *ngIf="showMessage" [class]="class" role="alert">
+    {{message}}
+  </div>
+
+  <div *ngIf="!loading">
     <form [formGroup]="skillsForm" (ngSubmit)="onSubmit()">
-        <div class="form-row">
-            <div class="col">
-                <select class="form-control" formControlName="category">
-                    <option>Lenguajes Programación</option>
-                    <option>Entornos</option>
-                    <option>Capacidad Personal</option>
-                </select>
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" formControlName="description" placeholder="Descripción">
-            </div>
-
-            <button type="submit" class="btn btn-success" [disabled]="skillsForm.invalid">
-                <span class="fa fa-plus"></span> Añadir habilidad
-            </button>
+      <div class="form-row">
+        <div class="col">
+          <select class="form-control" formControlName="category">
+            <option>Lenguajes Programación</option>
+            <option>Entornos</option>
+            <option>Capacidad Personal</option>
+          </select>
         </div>
+        <div class="col">
+          <input type="text" class="form-control" formControlName="description" placeholder="Descripción">
+        </div>
+
+        <button type="submit" class="btn btn-success" [disabled]="skillsForm.invalid">
+          <span class="fa fa-plus"></span> Añadir habilidad
+        </button>
+      </div>
     </form>
 
 
     <ul class="list-group">
-        <li class="list-group-item">Cras justo odio
+      <li class="list-group-item" *ngFor="let skill of skillList">
+        {{skill.description}} -- {{skill.category}}
 
-            <button type="button" (click)="delete()" class="btn btn-danger float-right">
-                <span class="fa fa-remove"></span>
-            </button>
-
-            <button type="button" (click)="edit()" class="btn btn-info float-right" >
-                <span class="fa fa-pencil"></span>
-            </button>
-        </li>
+        <button type="button" (click)="delete(skill)" class="btn btn-danger float-right">
+          <span class="fa fa-remove"></span>
+        </button>
+      </li>
     </ul>
+  </div>
 </div>

@@ -1,33 +1,44 @@
 <app-navbar-dashboard></app-navbar-dashboard>
 
 <div class="container">
-    <div>
-        <h1>Intereses</h1>
-    </div>
-
-    <div *ngIf="true" class="alert alert-warning" role="alert">
-        MENSAJE
-    </div>
+  <div>
+    <h1>Intereses</h1>
+  </div>
 
 
+  <div *ngIf="loading">
+    <h5 class="btn btn-warning">CARGANDO...</h5>
+  </div>
+
+  <div *ngIf="showMessage" [class]="class" role="alert">
+    {{message}}
+  </div>
+
+
+  <div *ngIf="!loading">
     <form [formGroup]="interestForm" (ngSubmit)="onSubmit()">
-        <div class="col text-right" style="margin-bottom: 10px">
-            <button type="button" class="btn btn-info" (click)="edit()" *ngIf="!save">
-                <span class="fa fa-pencil"></span> Editar
-            </button>
+      <div class="col text-right" style="margin-bottom: 10px">
+        <button type="button" class="btn btn-info" (click)="edit(interestForm)" *ngIf="!save">
+          <span class="fa fa-pencil"></span> Editar
+        </button>
 
-            <button type="button" class="btn btn-warning" (click)="edit()" *ngIf="save">
-                <span class="fa fa-remove"></span> Cancelar
-            </button>
-        </div>
+        <button type="button" class="btn btn-warning" (click)="edit(interestForm)" *ngIf="save">
+          <span class="fa fa-remove"></span> Cancelar
+        </button>
+      </div>
 
-        <div class="col">
-            <textarea class="form-control" id="description" name="interest" formControlName="description" rows="10" autocomplete="description"></textarea>
-        </div>
+      <div class="col">
+        <textarea class="form-control" id="description" name="interest" formControlName="description" rows="10" autocomplete="description"></textarea>
+      </div>
 
-        <div style="margin-top: 10px">
-            <button type="submit" class="btn btn-success btn-block" *ngIf="save">Guardar</button> &nbsp;
-        </div>
+      <div class="col" *ngIf="false">
+        <input type="text" class="form-control" formControlName="id" placeholder="id" autocomplete="id">
+      </div>
+
+      <div style="margin-top: 10px">
+        <button type="submit" class="btn btn-success btn-block" *ngIf="save">Guardar</button> &nbsp;
+      </div>
     </form>
+  </div>
 
 </div>

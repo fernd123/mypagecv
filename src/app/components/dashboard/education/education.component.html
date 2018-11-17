@@ -5,7 +5,11 @@
     <h1>Educación</h1>
   </div>
 
-  <div *ngIf="true" class="alert alert-warning" role="alert">
+  <div *ngIf="loading">
+    <h5 class="btn btn-warning">CARGANDO...</h5>
+  </div>
+
+  <div *ngIf="true" [class]="class" role="alert">
     {{message}}
   </div>
 
@@ -15,95 +19,84 @@
     </button>
   </div>
 
-  <div class="form-group" *ngFor="let edu of educationList; let i = index;">
+  <div *ngIf="!loading">
 
-    <form #educationForm="ngForm" (ngSubmit)="onSubmit(educationForm)">
-      <div class="text-right" style="margin-bottom: 10px">
+    <div class="form-group" *ngFor="let edu of dashBoardService.educationList; let i = index;">
 
-        <button type="button" (click)="edit(educationForm, edu.id)" class="btn btn-info" *ngIf="educationForm.disabled">
-          <span class="fa fa-pencil"></span>
-        </button>
+      <form #educationForm="ngForm" (ngSubmit)="onSubmit(educationForm)">
+        <div class="text-right" style="margin-bottom: 10px">
 
-        <button type="button" (click)="remove(educationForm, edu.id)" class="btn btn-danger" *ngIf="educationForm.disabled">
-          <span class="fa fa-trash"></span>
-        </button>
+          <button type="button" (click)="editForm(educationForm, edu.id)" class="btn btn-info" *ngIf="educationFormDisabled">
+            <span class="fa fa-pencil"></span>
+          </button>
 
-        <button type="button" (click)="save(educationForm, edu.id)" class="btn btn-success" *ngIf="!educationForm.disabled">
-          <span class="fa fa-check"></span>
-        </button>
+          <button type="button" (click)="remove(educationForm, edu.id)" class="btn btn-danger" *ngIf="educationFormDisabled">
+            <span class="fa fa-trash"></span>
+          </button>
 
-        <button type="button" (click)="cancel(educationForm, edu.id)" class="btn btn-warning" *ngIf="!educationForm.disabled">
-          <span class="fa fa-remove"></span>
-        </button>
-      </div>
+          <button type="button" (click)="saveForm(educationForm, edu.id)" class="btn btn-success" *ngIf="!educationFormDisabled">
+            <span class="fa fa-check"></span>
+          </button>
 
-      <div class="row">
-        <div class="col">
-          <label for="place" class="center-block">Lugar</label>
-          <input type="text" class="form-control no-border" name="place{{edu.id}}" [disabled]="true" [(ngModel)]="edu.place" placeholder="Lugar"
-            autocomplete="place">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <label for="degree" class="center-block">Titulación</label>
-          <input type="text" class="form-control" name="degree{{edu.id}}" [disabled]="true" [(ngModel)]="edu.degree" placeholder="Empresa"
-            autocomplete="degree">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <label for="datefrom" class="center-block">Fecha Desde</label>
-          <input type="date" class="form-control" name="datefrom{{edu.id}}" [disabled]="true" [(ngModel)]="edu.datefrom" placeholder="Fecha Desde"
-            autocomplete="datefrom">
+          <button type="button" (click)="cancel(educationForm, edu.id)" class="btn btn-warning" *ngIf="!educationFormDisabled">
+            <span class="fa fa-remove"></span>
+          </button>
         </div>
 
-        <div class="col">
-          <label for="dateto" class="center-block">Fecha Hasta</label>
-          <input type="date" class="form-control" name="dateto{{edu.id}}" [disabled]="true" [(ngModel)]="edu.dateto" placeholder="Fecha Hasta"
-            autocomplete="dateto">
+        <div class="row">
+          <div class="col">
+            <label for="place" class="center-block">Lugar</label>
+            <input type="text" class="form-control no-border" name="place" [disabled]="true" [(ngModel)]="edu.place" placeholder="Lugar"
+              autocomplete="place">
+          </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col">
-          <label for="description" class="center-block">Descripción</label>
-          <textarea class="form-control" id="description" name="description{{edu.id}}" [disabled]="true" [(ngModel)]="edu.description"
-            rows="5" autocomplete="description"></textarea>
+        <div class="row">
+          <div class="col">
+            <label for="degree" class="center-block">Titulación</label>
+            <input type="text" class="form-control" name="degree" [disabled]="true" [(ngModel)]="edu.degree" placeholder="Empresa"
+              autocomplete="degree">
+          </div>
         </div>
-      </div>
 
-      <div style="margin-top: 10px">
-        <button type="submit" class="btn btn-success btn-block" *ngIf="false">Guardar</button> &nbsp;
-      </div>
+        <div class="row">
+          <div class="col">
+            <label for="datefrom" class="center-block">Fecha Desde</label>
+            <input type="date" class="form-control" name="datefrom" [disabled]="true" [(ngModel)]="edu.datefrom" placeholder="Fecha Desde"
+              autocomplete="datefrom">
+          </div>
 
-      <hr>
+          <div class="col">
+            <label for="dateto" class="center-block">Fecha Hasta</label>
+            <input type="date" class="form-control" name="dateto" [disabled]="true" [(ngModel)]="edu.dateto" placeholder="Fecha Hasta"
+              autocomplete="dateto">
+          </div>
+        </div>
 
-    </form>
+        <div class="row">
+          <div class="col">
+            <label for="description" class="center-block">Descripción</label>
+            <textarea class="form-control" id="description" name="description" [disabled]="true" [(ngModel)]="edu.description" rows="5"
+              autocomplete="description"></textarea>
+          </div>
+        </div>
+
+        <div class="col" *ngIf="false">
+          <input type="text" class="form-control" placeholder="id" autocomplete="id" name="id" [(ngModel)]="edu.id">
+        </div>
+
+        <div style="margin-top: 10px">
+          <button type="submit" class="btn btn-success btn-block" *ngIf="false">Guardar</button> &nbsp;
+        </div>
+
+        <hr>
+
+      </form>
+    </div>
   </div>
 
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nueva Educación</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <!-- INICIO -->
-          <app-addeducation></app-addeducation>
-          <!-- FIN -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success">Guardar</button> &nbsp;
-        </div>
-      </div>
-    </div>
+    <app-addeducation></app-addeducation>
   </div>

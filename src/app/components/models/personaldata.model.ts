@@ -8,4 +8,16 @@ export class PersonalData{
     city: String;
     country: String;
     information: String;
+
+    constructor(){
+        this.id = null;
+        this.name = "";
+        this.lastname = "";
+        this.birthday = null;
+        this.phone = "";
+        this.mail = "";
+        this.city = "";
+        this.country = "España";
+        this.information = "";
+    }
 }
