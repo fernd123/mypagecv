@@ -1,3 +1,4 @@
+import { Project } from './../components/models/project.model';
 import { Experience } from './../components/models/experience.model';
 import { Education } from './../components/models/education.model';
 import { Course } from './../components/models/course.model';
@@ -23,6 +24,7 @@ export class DashboardService {
   interestURL: string = `${this.baseURL}/interest`;
   educationURL: string = `${this.baseURL}/education`;
   experienceURL: string = `${this.baseURL}/experience`;
+  projectURL: string = `${this.baseURL}/project`;
 
   constructor(private http: HttpClient) {
   }
@@ -261,5 +263,36 @@ export class DashboardService {
 
   // ====== END EDUCATION ===============
 
+  // ====== SKILLS ================
+  createProject(project: Project) {
 
+    let body: string = JSON.stringify(project);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let url = `${this.projectURL}.json`;
+
+    return this.http.post(
+      url,
+      body,
+      { headers }
+    );
+  }
+
+  getProjects() {
+    let url = `${this.projectURL}.json`;
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.get(
+      url,
+      { headers }
+    );
+  }
+
+  deleteProject(project: Project) {
+    let url = `${this.projectURL}/${project.id}.json`;
+    return this.http.delete(
+      url
+    );
+  }
+
+  // ====== END SKILLS ================
 }

@@ -17,6 +17,7 @@ import { SkillsComponent } from './components/dashboard/skills/skills.component'
 import { InterestsComponent } from './components/dashboard/interests/interests.component';
 import { AddeducationComponent } from './components/dashboard/education/addeducation/addeducation.component';
 import { AddexperienceComponent } from './components/dashboard/experience/addexperience/addexperience.component';
+import { ProjectComponent } from './components/dashboard/projects/project.component';
 
 
 // Routes
@@ -51,6 +52,7 @@ export const firebaseConfig = {
     EducationComponent,
     SkillsComponent,
     InterestsComponent,
+    ProjectComponent,
     AddeducationComponent,
     AddexperienceComponent
   ],

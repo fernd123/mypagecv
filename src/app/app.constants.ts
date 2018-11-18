@@ -25,5 +25,11 @@ export class AppConstants {
     public titleProgramLanguage = "Lenguajes de Programación";
     public titleWorkflow = "Métodos de trabajo";
     public titlePersonalCapabilities = "Capacidades Personales";
+    public titleProjects = "Mis Proyectos";
+
+    public skillCategoryList = ["Lenguajes Programación", "Entornos", "Capacidad Personal"];
+    public skillProgrammingLanguage = "Lenguajes Programación";
+    public skillEnviroment = "Entornos";
+    public skillPersonal = "Capacidad Personal";
 
 }

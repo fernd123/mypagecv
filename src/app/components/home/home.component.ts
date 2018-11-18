@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Experience } from '../models/experience.model';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { Project } from '../models/project.model';
 
 
 @Component({
@@ -25,6 +26,8 @@ export class HomeComponent implements OnInit {
   skillList: Skill[] = [];
   interestList: Interest[] = [];
   courseList: Course[] = [];
+  projectList: Project[] = [];
+
 
   loading: boolean = true;
 
@@ -40,9 +43,9 @@ export class HomeComponent implements OnInit {
     let courseGet: any = this.dashBoardService.getCourses();
     let skillGet: any = this.dashBoardService.getSkills();
     let personalDataGet: any = this.dashBoardService.getPersonalData();
+    let projectGet: any = this.dashBoardService.getProjects();
 
-
-    forkJoin(educationGet, experienceGet, interestGet, courseGet, skillGet, personalDataGet).subscribe((data: any) => {
+    forkJoin(educationGet, experienceGet, interestGet, courseGet, skillGet, personalDataGet, projectGet).subscribe((data: any) => {
       if (data != null) {
 
         if (data[0] != null) {
@@ -87,6 +90,13 @@ export class HomeComponent implements OnInit {
           }
         }
 
+        if (data[6] != null) {
+          for (let i in data[6]) {
+            data[6][i].id = i;
+            this.projectList.push(data[6][i]);
+          }
+        }
+
         this.loading = false;
       }
     }
@@ -96,6 +106,16 @@ export class HomeComponent implements OnInit {
   internalRoute(location) {
     window.location.hash = '';
     window.location.hash = location;
+  }
+
+  getSkillsByCategory(category: String){
+    let skillsCategoryList:Skill[] = [];
+    for(let i=0; i<this.skillList.length; i++){
+      if(this.skillList[i].category == category){
+        skillsCategoryList.push(this.skillList[i]);
+      }
+    }
+    return skillsCategoryList;
   }
 
 }

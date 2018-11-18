@@ -1,3 +1,4 @@
+import { ProjectComponent } from './components/dashboard/projects/project.component';
 import { SkillsComponent } from './components/dashboard/skills/skills.component';
 import { InterestsComponent } from './components/dashboard/interests/interests.component';
 import { EducationComponent } from './components/dashboard/education/education.component';
@@ -5,7 +6,6 @@ import { CourseComponent } from './components/dashboard/course/course.component'
 import { ExperienceComponent } from './components/dashboard/experience/experience.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PersonalinformationComponent } from './components/dashboard/personalinformation/personalinformation.component';
 
@@ -18,8 +18,8 @@ export const APP_ROUTES: Routes = [
     { path: 'education', component: EducationComponent },
     { path: 'skills', component: SkillsComponent },
     { path: 'interests', component: InterestsComponent },
-
     { path: 'course', component: CourseComponent },
+    { path: 'projects', component: ProjectComponent },
 
     { path: '**', pathMatch: 'full', redirectTo: 'home' },
     { path: '', pathMatch: 'full', redirectTo: 'home' }

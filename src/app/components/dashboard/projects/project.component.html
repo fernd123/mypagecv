@@ -1,0 +1,50 @@
+<app-navbar-dashboard></app-navbar-dashboard>
+
+<div class="container">
+  <div class="title">
+    <h1>{{this.appConstants.titleProjects}}</h1>
+  </div>
+
+  <div *ngIf="loading">
+    <h5 class="btn btn-warning">CARGANDO...</h5>
+  </div>
+
+  <div *ngIf="showMessage" [class]="class" role="alert">
+    {{message}}
+  </div>
+
+  <div *ngIf="!loading">
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+      <div>
+        <div class="form-row">
+          <div class="col">
+            <input type="text" class="form-control" formControlName="name" placeholder="Nombre">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" formControlName="url" placeholder="URL">
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <div class="col">
+            <textarea type="text" class="form-control" formControlName="description" placeholder="Descripción"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="projectForm.invalid">
+          <span class="fa fa-plus"></span> Añadir Proyecto
+        </button>
+      </div>
+    </form>
+
+
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let project of projectList">
+        {{project.name}} -- {{project.url}}
+
+        <button type="button" (click)="delete(project)" class="btn btn-danger float-right">
+          <span class="fa fa-remove"></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
