@@ -1,5 +1,7 @@
 import { AppConstants } from './../../app.constants';
 import { FormGroup } from '@angular/forms';
+import { environment } from './../../../environments/environment.prod';
+
 
 export class DashBoardParent {
     message: String = "";
@@ -9,6 +11,7 @@ export class DashBoardParent {
     showMessage: boolean = false;
     loading: boolean = true;
     appConstants: AppConstants = new AppConstants();
+    isGuest: boolean = environment.isGuest;
 
 
     edit(form: FormGroup): void {

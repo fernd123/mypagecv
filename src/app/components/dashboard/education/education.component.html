@@ -14,7 +14,7 @@
   </div>
 
   <div>
-    <button class="btn btn-success" (click)="add()" data-toggle="modal" data-target="#exampleModal">
+    <button class="btn btn-success" [disabled]="isGuest" (click)="add()" data-toggle="modal" data-target="#exampleModal">
       <span class="fa fa-plus"></span> Añadir nueva titulación
     </button>
   </div>
@@ -26,11 +26,11 @@
       <form #educationForm="ngForm" (ngSubmit)="onSubmit(educationForm)">
         <div class="text-right" style="margin-bottom: 10px">
 
-          <button type="button" (click)="editForm(educationForm, edu.id)" class="btn btn-info" *ngIf="educationFormDisabled">
+          <button type="button" [disabled]="isGuest" (click)="editForm(educationForm, edu.id)" class="btn btn-info" *ngIf="educationFormDisabled">
             <span class="fa fa-pencil"></span>
           </button>
 
-          <button type="button" (click)="remove(educationForm, edu.id)" class="btn btn-danger" *ngIf="educationFormDisabled">
+          <button type="button" [disabled]="isGuest" (click)="remove(educationForm, edu.id)" class="btn btn-danger" *ngIf="educationFormDisabled">
             <span class="fa fa-trash"></span>
           </button>
 

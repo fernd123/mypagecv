@@ -5,6 +5,7 @@ import { DashboardService } from './../../../services/dashboard.service';
 import { Course } from './../../models/course.model';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-course',
@@ -35,6 +36,10 @@ export class CourseComponent extends DashBoardParent implements OnInit {
       description: new FormControl(this.course.description, Validators.required),
       place: new FormControl(this.course.place, Validators.required)
     });
+
+    if(environment.isGuest){
+      this.courseForm.disable();
+    }
   }
 
   refreshCourseList(): void {

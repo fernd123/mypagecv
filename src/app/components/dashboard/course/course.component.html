@@ -30,7 +30,7 @@
           <input type="text" class="form-control" formControlName="place" placeholder="Lugar">
         </div>
 
-        <button type="submit" class="btn btn-success" [disabled]="courseForm.invalid">
+        <button type="submit" class="btn btn-success" [disabled]="courseForm.invalid || isGuest">
           <span class="fa fa-plus"></span> Añadir curso
         </button>
       </div>
@@ -41,7 +41,8 @@
       <li class="list-group-item" *ngFor="let course of courseList">
         {{ course.description }} -- {{ course.type }}
 
-        <button type="button" (click)="delete(course)" class="btn btn-danger float-right">
+        <button type="button" (click)="delete(course)" class="btn btn-danger float-right"
+        [disabled]="isGuest">
           <span class="fa fa-remove"></span>
         </button>
 

@@ -1,3 +1,4 @@
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AppConstants } from './../../app.constants';
 import { Skill } from './../models/skill.model';
 import { Course } from './../models/course.model';
@@ -5,12 +6,12 @@ import { Education } from './../models/education.model';
 import { PersonalData } from './../models/personaldata.model';
 import { Interest } from './../models/interest.model';
 import { DashboardService } from './../../services/dashboard.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Experience } from '../models/experience.model';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Project } from '../models/project.model';
-
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-home',
@@ -28,10 +29,12 @@ export class HomeComponent implements OnInit {
   courseList: Course[] = [];
   projectList: Project[] = [];
 
-
   loading: boolean = true;
+  user: any = { email: '', password: '' };
+  loginForm: FormGroup;
+  @ViewChild('loginModalVar')loginModal:any;
 
-  constructor(private router: Router,
+  constructor(private router: Router, private fb: FormBuilder,
     public dashBoardService: DashboardService) {
     this.loading = true;
   }
@@ -108,14 +111,26 @@ export class HomeComponent implements OnInit {
     window.location.hash = location;
   }
 
-  getSkillsByCategory(category: String){
-    let skillsCategoryList:Skill[] = [];
-    for(let i=0; i<this.skillList.length; i++){
-      if(this.skillList[i].category == category){
+  getSkillsByCategory(category: String) {
+    let skillsCategoryList: Skill[] = [];
+    for (let i = 0; i < this.skillList.length; i++) {
+      if (this.skillList[i].category == category) {
         skillsCategoryList.push(this.skillList[i]);
       }
     }
     return skillsCategoryList;
+  }
+
+
+  //Login functions
+  onSubmit(loginForm: any): void {
+    environment.isGuest = false;
+    this.internalRoute('personaldata');
+  }
+
+  loginAsGuest(): void {
+    environment.isGuest = true;
+    this.internalRoute('personaldata');
   }
 
 }

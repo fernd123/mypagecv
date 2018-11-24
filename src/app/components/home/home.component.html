@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary-custom fixed-top" style="background-color: #BD5D38" id="sideNav">
-  <a class="navbar-brand js-scroll-trigger" href="#page-top"> 
+  <a class="navbar-brand js-scroll-trigger" href="#page-top">
     <span class="d-block d-lg-none">{{this.appConstants.titlePage}}</span>
     <span class="d-none d-lg-block">
       <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="Profile">
@@ -40,7 +40,8 @@
         <!-- #projects -->
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['../personaldata']">{{this.appConstants.titleDashboard}}</a>
+        <a class="nav-link" data-toggle="modal" data-target="#loginModal">{{this.appConstants.titleDashboard}}</a>
+        <!--</a>[routerLink]="['../dashboard ']" -->
       </li>
     </ul>
   </div>
@@ -59,15 +60,15 @@
           <a href="mailto:frodriguezsidro@gmail.com">{{ personalData[0].mail }}</a>
         </div>
         <p class="mb-5">{{ personalData[0].information }}
-            Aquí puedes ver algunas fotos de mis viajes
+          Aquí puedes ver algunas fotos de mis viajes
         </p>
         <span class="d-none d-lg-block">
-            <img class="img-thumbnail" height="350" width="300" src="assets/img/avion.jpg" alt="avion">
-            <img class="img-thumbnail" height="350" width="300" src="assets/img/armada.jpg" alt="armada">
-            <img class="img-thumbnail" height="350" width="300" src="assets/img/parlamento.JPG" alt="parlamento">
-            <img class="img-thumbnail" height="350" width="300" src="assets/img/arco.JPG" alt="arco">
-            <img class="img-thumbnail" height="350" width="300" src="assets/img/vitoria.jpg" alt="vitoria">
-            <img class="img-thumbnail" height="350" width="300" src="assets/img/tranvia.JPG" alt="tranvia">
+          <img class="img-thumbnail" height="350" width="300" src="assets/img/avion.jpg" alt="avion">
+          <img class="img-thumbnail" height="350" width="300" src="assets/img/armada.jpg" alt="armada">
+          <img class="img-thumbnail" height="350" width="300" src="assets/img/parlamento.JPG" alt="parlamento">
+          <img class="img-thumbnail" height="350" width="300" src="assets/img/arco.JPG" alt="arco">
+          <img class="img-thumbnail" height="350" width="300" src="assets/img/vitoria.jpg" alt="vitoria">
+          <img class="img-thumbnail" height="350" width="300" src="assets/img/tranvia.JPG" alt="tranvia">
         </span>
 
         <!--
@@ -119,7 +120,8 @@
             <p>{{exp.description}}</p>
           </div>
           <div class="resume-date text-md-right">
-            <span class="text-primary-custom">{{ exp.datefrom | date:'dd/MM/yyyy'}} - {{ exp.dateto | date:'dd/MM/yyyy'}}</span>
+            <span class="text-primary-custom">{{ exp.datefrom | date:'dd/MM/yyyy'}} - {{ exp.dateto == null ? 'Actualmente' : 
+              exp.dateto | date:'dd/MM/yyyy'}}</span>
           </div>
         </div>
       </div>
@@ -137,7 +139,8 @@
             <div>{{education.description}}</div>
           </div>
           <div class="resume-date text-md-right">
-            <span class="text-primary-custom">{{education.datefrom | date:'dd/MM/yyyy'}} - {{education.dateto | date:'dd/MM/yyyy'}} </span>
+            <span class="text-primary-custom">{{education.datefrom | date:'dd/MM/yyyy'}} - {{education.dateto |
+              date:'dd/MM/yyyy'}} </span>
           </div>
         </div>
       </div>
@@ -227,7 +230,7 @@
         <h2 class="mb-5">{{this.appConstants.titleProjects}}</h2>
         <ul class="fa-ul mb-0" *ngFor="let project of projectList">
           <li>
-              <i class="fa-li fa fa-laptop text-warning"></i>
+            <i class="fa-li fa fa-laptop text-warning"></i>
             <a [href]="project.url" target="_blank">{{project.name}}</a>
             <p>{{interestList[0].description}}</p>
           </li>
@@ -235,5 +238,43 @@
       </div>
     </section>
   </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" #loginModalVar id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login Form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #loginForm>
+
+          <div class="form-group">
+            <label for="name" class="center-block">Correo</label>
+            <input type="text" class="form-control" name="email" placeholder="Email" autocomplete="email"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="center-block">Contraseña</label>
+            <input type="password" class="form-control" name="password" placeholder="Contraseña"
+              autocomplete="password" required>
+          </div>
+
+          <div>
+            <button type="submit" class="btn btn-success btn-block" data-dismiss="modal" (click)="onSubmit(loginForm)" [disabled]="false">Login</button>
+            &nbsp;
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" (click)="loginAsGuest()">Entrar como Invitado</button> &nbsp;
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>

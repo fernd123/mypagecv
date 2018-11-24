@@ -5,6 +5,7 @@ import { DashBoardParent } from './../../models/dashboardparent.model';
 import { Education } from './../../models/education.model';
 import { NgForm, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-education',
@@ -48,8 +49,10 @@ export class EducationComponent extends DashBoardParent implements OnInit {
   }
 
   editForm(educationForm: NgForm, id: string) {
-    educationForm.form.enable();
-    this.educationFormDisabled = false;
+    if(!environment.isGuest){
+      educationForm.form.enable();
+      this.educationFormDisabled = false;
+    }
   }
 
   remove(educationForm: NgForm, id: string) {

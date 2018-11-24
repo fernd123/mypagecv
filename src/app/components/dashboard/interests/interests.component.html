@@ -18,7 +18,7 @@
   <div *ngIf="!loading">
     <form [formGroup]="interestForm" (ngSubmit)="onSubmit()">
       <div class="col text-right" style="margin-bottom: 10px">
-        <button type="button" class="btn btn-info" (click)="edit(interestForm)" *ngIf="!save">
+        <button type="button" class="btn btn-info" [disabled]="isGuest" (click)="edit(interestForm)" *ngIf="!save">
           <span class="fa fa-pencil"></span> Editar
         </button>
 

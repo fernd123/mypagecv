@@ -27,7 +27,7 @@
           <input type="text" class="form-control" formControlName="description" placeholder="Descripción">
         </div>
 
-        <button type="submit" class="btn btn-success" [disabled]="skillsForm.invalid">
+        <button type="submit" class="btn btn-success" [disabled]="skillsForm.invalid || isGuest">
           <span class="fa fa-plus"></span> Añadir habilidad
         </button>
       </div>
@@ -38,7 +38,7 @@
       <li class="list-group-item" *ngFor="let skill of skillList">
         {{skill.description}} -- {{skill.category}}
 
-        <button type="button" (click)="delete(skill)" class="btn btn-danger float-right">
+        <button type="button" [disabled]="isGuest" (click)="delete(skill)" class="btn btn-danger float-right">
           <span class="fa fa-remove"></span>
         </button>
       </li>

@@ -33,6 +33,9 @@ export class ProjectComponent extends DashBoardParent implements OnInit {
       url: new FormControl(this.project.url, Validators.required),
       description: new FormControl(this.project.description, Validators.required)
     });
+    if (this.isGuest) {
+      this.projectForm.disable();
+    }
   }
 
   refreshProjectList(): void {
@@ -47,7 +50,7 @@ export class ProjectComponent extends DashBoardParent implements OnInit {
           this.projectForm.get('description').setValue('');
           this.projectForm.get('url').setValue('');
         }
-        this.loading = false;
+      this.loading = false;
     });
   }
 

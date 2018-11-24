@@ -25,6 +25,8 @@ import { APP_ROUTING } from './app.routes';
 
 // Service
 import { DashboardService } from './services/dashboard.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 // Firebase
 
@@ -39,7 +41,6 @@ export const firebaseConfig = {
   messagingSenderId: "881049801031"
 };
 */
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,13 +62,13 @@ export const firebaseConfig = {
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    /* AngularFireModule.initializeApp(firebaseConfig),
+    /*AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFireStorageModule, */
+    */
     APP_ROUTING
   ],
-  providers: [DashboardService],
+  providers: [DashboardService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

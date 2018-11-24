@@ -17,7 +17,7 @@
     <form [formGroup]="personalinfoForm" (ngSubmit)="onSubmit()">
 
       <div class="col text-right" style="margin-bottom: 10px">
-        <button type="button" class="btn btn-info" (click)="edit(personalinfoForm)" *ngIf="!save">
+        <button type="button" class="btn btn-info" [disabled]="isGuest" (click)="edit(personalinfoForm)" *ngIf="!save">
           <span class="fa fa-pencil"></span> Editar
         </button>
 

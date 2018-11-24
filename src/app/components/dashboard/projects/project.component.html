@@ -30,7 +30,7 @@
             <textarea type="text" class="form-control" formControlName="description" placeholder="Descripción"></textarea>
           </div>
         </div>
-        <button type="submit" class="btn btn-success" [disabled]="projectForm.invalid">
+        <button type="submit" class="btn btn-success" [disabled]="projectForm.invalid || isGuest">
           <span class="fa fa-plus"></span> Añadir Proyecto
         </button>
       </div>
@@ -41,7 +41,7 @@
       <li class="list-group-item" *ngFor="let project of projectList">
         {{project.name}} -- {{project.url}}
 
-        <button type="button" (click)="delete(project)" class="btn btn-danger float-right">
+        <button type="button" (click)="delete(project)" [disabled]="isGuest" class="btn btn-danger float-right">
           <span class="fa fa-remove"></span>
         </button>
       </li>

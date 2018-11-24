@@ -14,7 +14,7 @@
   </div>
 
   <div>
-      <button class="btn btn-success" (click)="add()" data-toggle="modal" data-target="#exampleModal">
+      <button class="btn btn-success" [disabled]="isGuest" (click)="add()" data-toggle="modal" data-target="#exampleModal">
         <span class="fa fa-plus"></span> Añadir nueva experiencia
       </button>
     </div>
@@ -25,11 +25,11 @@
       <form #experienceForm="ngForm" (ngSubmit)="onSubmit(experienceForm)">
         <div class="text-right" style="margin-bottom: 10px">
 
-          <button type="button" (click)="editForm(experienceForm, exp.id)" class="btn btn-info" *ngIf="experienceForm.disabled">
+          <button type="button" [disabled]="isGuest" (click)="editForm(experienceForm, exp.id)" class="btn btn-info" *ngIf="experienceForm.disabled">
             <span class="fa fa-pencil"></span>
           </button>
 
-          <button type="button" (click)="remove(experienceForm, exp.id)" class="btn btn-danger" *ngIf="experienceForm.disabled">
+          <button type="button" [disabled]="isGuest" (click)="remove(experienceForm, exp.id)" class="btn btn-danger" *ngIf="experienceForm.disabled">
             <span class="fa fa-trash"></span>
           </button>
 

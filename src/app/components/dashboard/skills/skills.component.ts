@@ -32,6 +32,10 @@ export class SkillsComponent extends DashBoardParent implements OnInit {
       category: new FormControl(this.skill.category, Validators.required),
       description: new FormControl(this.skill.description, Validators.required)
     });
+
+    if(this.isGuest){
+      this.skillsForm.disable();
+    }
   }
 
   refreshSkillList(): void {

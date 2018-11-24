@@ -1,1 +1,21 @@
-<app-navbar-dashboard></app-navbar-dashboard>
+<div class="container loginForm">
+    <h2>Login Form</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="name" class="center-block">Correo</label>
+          <input type="text" class="form-control" formControlName="email" placeholder="Email" autocomplete="email" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="password" class="center-block">Contraseña</label>
+          <input type="password" class="form-control" formControlName="password" placeholder="Contraseña" autocomplete="password" required>
+        </div>
+  
+        <div>
+          <button type="submit" class="btn btn-success btn-block" [disabled]="!loginForm.invalid">Login</button> &nbsp;
+          <button type="submit" class="btn btn-primary btn-block">Entrar como Invitado</button> &nbsp;
+        </div>
+      </form>
+   
+</div>
