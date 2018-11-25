@@ -1,18 +1,19 @@
+import { AUTH_CONFIG } from './auth0-variables';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
+import { environment } from '../../environments/environment';
+(window as any).global = window;
 
 @Injectable()
 export class AuthService {
 
   auth0 = new auth0.WebAuth({
-    clientID: 'ZEP4Budb9p0Pob4TmM7I5ctEfvblj7uM',
-    domain: 'frodriguez.eu.auth0.com',
+    clientID: AUTH_CONFIG.clientID,
+    domain: AUTH_CONFIG.domain,
     responseType: 'token id_token',
-    audience: 'https://frodriguez.eu.auth0.com/userinfo',
-    redirectUri: 'http://localhost:4200/callback',
-    scope: 'openid profile'
+    redirectUri: AUTH_CONFIG.callbackURL
   });
 
   userProfile: any;
@@ -27,15 +28,16 @@ export class AuthService {
   public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['/home']);
+        this.internalRoute("personaldata");
       } else if (err) {
         this.router.navigate(['/home']);
         console.log(err);
+        alert(`Error: ${err.error}. Check the console for further details.`);
       }
     });
   }
+
 
   private setSession(authResult): void {
     // Set the time that the Access Token will expire at
@@ -64,7 +66,8 @@ export class AuthService {
   public getProfile(cb): void {
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
-      throw new Error('Access Token must exist to fetch profile');
+      return;
+     // throw new Error('Access Token must exist to fetch profile');
     }
 
     const self = this;
@@ -75,5 +78,10 @@ export class AuthService {
       cb(err, profile);
     });
 
-}
+  }
+
+  public internalRoute(location) {
+    window.location.hash = '';
+    window.location.hash = location;
+  }
 }

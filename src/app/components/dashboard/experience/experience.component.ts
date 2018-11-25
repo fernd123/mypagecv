@@ -31,7 +31,6 @@ export class ExperienceComponent extends DashBoardParent implements OnInit {
   saveForm(experienceForm: NgForm, id: string) {
     this.loading = true;
     experienceForm.value.id = id;
-    debugger;
     this.dashBoardService.editExperience(experienceForm.value).subscribe(data => {
       console.log(data);
       experienceForm.form.disable();

@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AppConstants } from './../../app.constants';
 import { Skill } from './../models/skill.model';
@@ -32,14 +33,20 @@ export class HomeComponent implements OnInit {
   loading: boolean = true;
   user: any = { email: '', password: '' };
   loginForm: FormGroup;
-  @ViewChild('loginModalVar')loginModal:any;
+  profile: any = {email: ''}
+  @ViewChild('loginModalVar') loginModal: any;
 
   constructor(private router: Router, private fb: FormBuilder,
-    public dashBoardService: DashboardService) {
+    public dashBoardService: DashboardService, public auth: AuthService) {
     this.loading = true;
   }
 
   ngOnInit() {
+    this.auth.getProfile((err, profile) => {
+      this.profile = profile;
+    });
+
+
     let educationGet: any = this.dashBoardService.getEducation();
     let experienceGet: any = this.dashBoardService.getExperience();
     let interestGet: any = this.dashBoardService.getInterest();
@@ -107,8 +114,7 @@ export class HomeComponent implements OnInit {
   }
 
   internalRoute(location) {
-    window.location.hash = '';
-    window.location.hash = location;
+    this.auth.internalRoute(location);
   }
 
   getSkillsByCategory(category: String) {
@@ -123,14 +129,25 @@ export class HomeComponent implements OnInit {
 
 
   //Login functions
-  onSubmit(loginForm: any): void {
-    environment.isGuest = false;
-    this.internalRoute('personaldata');
+
+  public checkLogin(){
+    debugger;
+    if(this.auth.isAuthenticated()){
+      this.auth.internalRoute("personaldata");
+    }
+  }
+  public login(guest: boolean): void {
+    //this.auth.logout;
+    if (guest) {
+
+    } else {
+      this.auth.login();
+    }
+    //environment.isGuest = false;
   }
 
-  loginAsGuest(): void {
-    environment.isGuest = true;
-    this.internalRoute('personaldata');
+  public logout() {
+    this.auth.logout();
   }
 
 }

@@ -1,3 +1,4 @@
+import { AuthGuardService } from './services/auth-guard.service';
 import { ProjectComponent } from './components/dashboard/projects/project.component';
 import { SkillsComponent } from './components/dashboard/skills/skills.component';
 import { InterestsComponent } from './components/dashboard/interests/interests.component';
@@ -12,14 +13,14 @@ import { PersonalinformationComponent } from './components/dashboard/personalinf
 
 export const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'personaldata', component: PersonalinformationComponent },
-    { path: 'experience', component: ExperienceComponent },
-    { path: 'education', component: EducationComponent },
-    { path: 'skills', component: SkillsComponent },
-    { path: 'interests', component: InterestsComponent },
-    { path: 'course', component: CourseComponent },
-    { path: 'projects', component: ProjectComponent },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
+    { path: 'personaldata', component: PersonalinformationComponent, canActivate: [AuthGuardService] },
+    { path: 'experience', component: ExperienceComponent, canActivate: [AuthGuardService] },
+    { path: 'education', component: EducationComponent, canActivate: [AuthGuardService] },
+    { path: 'skills', component: SkillsComponent, canActivate: [AuthGuardService] },
+    { path: 'interests', component: InterestsComponent, canActivate: [AuthGuardService] },
+    { path: 'course', component: CourseComponent, canActivate: [AuthGuardService] },
+    { path: 'projects', component: ProjectComponent, canActivate: [AuthGuardService] },
 
     { path: '**', pathMatch: 'full', redirectTo: 'home' },
     { path: '', pathMatch: 'full', redirectTo: 'home' }
